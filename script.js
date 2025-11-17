@@ -1,191 +1,172 @@
-document.addEventListener('DOMContentLoaded', function() {
-            
-    const gallerySwiperWrapper = document.getElementById('gallery-swiper-wrapper');
-    const modalSwiperWrapper = document.getElementById("modal-swiper-wrapper");
-    const modal = document.getElementById("lightboxModal");
-    const closeBtn = document.querySelector(".close-btn");
-    
-    let mySwiperInstance; 
-    let modalSwiperInstance; 
-    
-    // --- CHARGEMENT ASYNCHRONE DES DONNÉES JSON ---
-    async function initializeGallery() {
-        let allImagesData = [];
-        const jsonPath = 'images.json'; 
+// =========================================================================
+// SCRIPT DE DÉMARRAGE ET DE GESTION DE LA GALERIE
+// =========================================================================
 
-        try {
-            const response = await fetch(jsonPath);
+// Instance du Swiper de la Modale (Lightbox) - globale pour l'accès
+let modalSwiperInstance = null;
+
+// Fonction de chargement des données et d'initialisation
+function init() {
+    // 1. Charger les données de la galerie depuis images.json
+    fetch('images.json')
+        .then(response => {
             if (!response.ok) {
-                throw new Error(`Erreur HTTP: ${response.status} lors du chargement de ${jsonPath}`);
+                throw new Error(`Erreur HTTP: ${response.status}`);
             }
-            allImagesData = await response.json();
+            return response.json();
+        })
+        .then(images => {
+            // 2. Créer la galerie principale et la modale
+            createGallery(images);
+        })
+        .catch(error => {
+            console.error('Erreur lors du chargement des images.json:', error);
+            // Afficher un message d'erreur simple à l'utilisateur
+            const gallerySection = document.getElementById('photos');
+            gallerySection.innerHTML = '<p style="text-align:center; color:red;">Erreur de chargement des images. Veuillez vérifier le fichier images.json.</p>';
+        });
+        
+    // 3. Initialisation des autres fonctionnalités (navigation mobile, etc.)
+    initMobileNav();
+}
+
+// =========================================================================
+// GALERIE - CREATION DU CAROUSEL & MISE À JOUR DU CHEMIN 'fotos/'
+// =========================================================================
+
+function createGallery(images) {
+    const galleryWrapper = document.getElementById('gallery-wrapper');
+    const modalWrapper = document.getElementById('modal-gallery-wrapper');
+    
+    // Vider les conteneurs existants
+    galleryWrapper.innerHTML = '';
+    modalWrapper.innerHTML = '';
+
+    images.forEach((image, index) => {
+        // --- 1. Création des slides pour le Carrousel Principal ---
+        const slide = document.createElement('div');
+        slide.classList.add('swiper-slide', 'gallery-item');
+        
+        const imgElement = document.createElement('img');
+        // CHEMIN MIS À JOUR VERS LE DOSSIER 'fotos'
+        imgElement.src = `fotos/${image.filename}`;
+        imgElement.alt = image.caption;
+        imgElement.classList.add('carousel-img');
+        imgElement.setAttribute('data-index', index); // Pour l'ouverture de la modale
+        
+        const captionDiv = document.createElement('div');
+        captionDiv.classList.add('carousel-caption');
+        captionDiv.textContent = image.caption;
+
+        slide.appendChild(imgElement);
+        slide.appendChild(captionDiv);
+        galleryWrapper.appendChild(slide);
+
+
+        // --- 2. Création des slides pour la Modale (Lightbox) ---
+        const modalSlide = document.createElement('div');
+        modalSlide.classList.add('swiper-slide');
+        
+        const modalImg = document.createElement('img');
+        // CHEMIN MIS À JOUR VERS LE DOSSIER 'fotos'
+        modalImg.src = `fotos/${image.filename}`;
+        modalImg.alt = image.caption;
+        
+        modalSlide.appendChild(modalImg);
+        modalWrapper.appendChild(modalSlide);
+    });
+
+    // --- 3. Initialisation du Swiper principal (Carrousel) ---
+    new Swiper('.mySwiper', { 
+        loop: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        // Autoplay rétabli pour un diaporama automatique
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        keyboard: true,
+    });
+
+
+    // --- 4. Initialisation de la Modale Swiper (Lightbox) ---
+    modalSwiperInstance = new Swiper('.modal-swiper-container', {
+        loop: true,
+        navigation: {
+            nextEl: '.modal-nav-next',
+            prevEl: '.modal-nav-prev',
+        },
+        keyboard: true,
+        mousewheel: true,
+    });
+
+
+    // --- 5. Gestion de l'ouverture de la Modale par clic sur l'image du carrousel ---
+    const carouselImages = document.querySelectorAll('.carousel-img');
+    const modal = document.getElementById('image-modal');
+    const closeBtn = document.querySelector('.close-btn');
+
+    carouselImages.forEach(img => {
+        img.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
             
-            buildGallery(allImagesData);
+            // Ouvrir la modale
+            modal.style.display = 'flex';
+            document.body.classList.add('modal-open');
             
-        } catch (error) {
-            console.error("Échec du chargement des données d'images:", error);
-            gallerySwiperWrapper.innerHTML = `<p style="text-align:center; color: red;">Erreur: Impossible de charger la galerie. Vérifiez le fichier 'images.json' et son chemin.</p>`;
-        }
-    }
-    
-    // --- FONCTION DE CONSTRUCTION DE LA GALERIE ---
-    function buildGallery(imagesData) {
-        if (imagesData.length === 0) {
-            gallerySwiperWrapper.innerHTML = `<p style="text-align:center; color: red;">Erreur: Aucune image dans le fichier JSON. La galerie est vide.</p>`;
-            return;
-        }
-        
-        // Nettoyage pour le cas où la fonction serait appelée plusieurs fois
-        gallerySwiperWrapper.innerHTML = ''; 
-
-        imagesData.forEach((image) => {
-            const slideDiv = document.createElement('div');
-            slideDiv.classList.add('swiper-slide', 'gallery-item');
-            
-            slideDiv.innerHTML = `
-                <img src="${image.filename}" alt="${image.caption}" class="carousel-img" loading="lazy">
-                <div class="carousel-caption">${image.caption}</div>
-            `;
-            gallerySwiperWrapper.appendChild(slideDiv);
-        });
-
-        // Initialisation du Swiper de la galerie
-        mySwiperInstance = new Swiper('.mySwiper', {
-            loop: true, 
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            slidesPerView: 1, 
-            spaceBetween: 0,
-        });
-        
-        addGalleryClickListeners(imagesData);
-    }
-    
-
-    
-    // --- Logique de la Lightbox (CORRIGÉE) ---
-    function addGalleryClickListeners(imagesData) {
-        const gallerySlides = document.querySelectorAll("#gallery-swiper-wrapper .swiper-slide");
-
-        gallerySlides.forEach((slide, index) => {
-            slide.addEventListener("click", () => {
-                
-                // 1. Reconstruire les slides de la modale
-                modalSwiperWrapper.innerHTML = ''; 
-                imagesData.forEach(image => {
-                    const slideDiv = document.createElement('div');
-                    slideDiv.classList.add('swiper-slide');
-                    
-                    const modalImg = document.createElement('img');
-                    modalImg.src = image.filename;
-                    modalImg.alt = image.caption;
-                    slideDiv.appendChild(modalImg);
-                    modalSwiperWrapper.appendChild(slideDiv);
-                });
-
-                // 2. Détruire l'ancienne instance si elle existe
-                if (modalSwiperInstance) {
-                    modalSwiperInstance.destroy(true, true);
-                }
-                
-                // 3. Initialiser la nouvelle instance
-                modalSwiperInstance = new Swiper('.modal-swiper-container', {
-                    initialSlide: index, 
-                    navigation: {
-                        nextEl: '.modal-nav-next',
-                        prevEl: '.modal-nav-prev',
-                    },
-                    loop: true,
-                    slidesPerView: 1,
-                    spaceBetween: 0,
-                });
-
-                // 4. Afficher le modal
-                modal.style.display = "flex";
-                document.body.style.overflow = "hidden";
-                
-                // AJOUT pour le CSS: marquer le body comme modale ouverte
-                document.body.classList.add('modal-open');
-
-                // 5. CORRECTION CLÉ : Mettre à jour Swiper après que la modale soit visible
-                if (modalSwiperInstance) {
-                    setTimeout(() => {
-                        // Forcer Swiper à recalculer la taille des slides (souvent nécessaire dans les modales)
-                        modalSwiperInstance.update(); 
-                        // S'assurer que nous allons à la bonne slide
-                        modalSwiperInstance.slideTo(index, 0);
-                    }, 50); // Petit délai pour laisser le navigateur rendre l'affichage 'flex'
-                }
-            });
-        });
-    }
-
-    // --- Fermeture de la Lightbox ---
-    function closeModal() {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
-        
-        // CORRECTION: Retirer la classe 'modal-open'
-        document.body.classList.remove('modal-open'); 
-
-        if (modalSwiperInstance) {
-            // Destruction complète pour libérer la mémoire et éviter les bugs
-            modalSwiperInstance.destroy(true, true);
-            modalSwiperInstance = null;
-        }
-    }
-    
-    if (modal) {
-        if (closeBtn) {
-            closeBtn.addEventListener("click", closeModal);
-        }
-
-        modal.addEventListener("click", (e) => {
-            // Fermer si on clique en dehors du contenu de la modale
-            if (e.target === modal) { 
-                closeModal();
-            }
-        });
-        
-        // Fermeture avec la touche Échap
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.style.display === 'flex') {
-                closeModal();
-            }
-        });
-    }
-    
-    // --- Menu mobile ---
-    const mobileToggle = document.querySelector(".mobile-menu-toggle");
-    const navList = document.querySelector(".nav-list");
-    
-    if (mobileToggle) {
-        mobileToggle.addEventListener("click", () => {
-            navList.classList.toggle("active");
-            const icon = mobileToggle.querySelector(".material-icons");
-            icon.textContent = navList.classList.contains("active") ? "close" : "menu";
-        });
-    }
-
-    // Fermeture automatique du menu lors d'un clic sur un lien
-    document.querySelectorAll(".nav-list a").forEach(link => {
-        link.addEventListener("click", () => {
-            if (navList.classList.contains("active")) {
-                navList.classList.remove("active");
-                if (mobileToggle) {
-                    mobileToggle.querySelector(".material-icons").textContent = "menu";
-                }
+            // Mettre à jour l'index de départ du Swiper de la modale
+            if (modalSwiperInstance) {
+                modalSwiperInstance.slideToLoop(index);
             }
         });
     });
-    
-    // Lancement de la fonction principale
-    initializeGallery();
 
-}); // Fin du DOMContentLoaded
+    // Fermeture de la modale
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+    });
+
+    // Fermeture par la touche Échap
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape" && modal.style.display === 'flex') {
+            modal.style.display = 'none';
+            document.body.classList.remove('modal-open');
+        }
+    });
+}
+
+// =========================================================================
+// NAVIGATION MOBILE
+// =========================================================================
+function initMobileNav() {
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+    const navList = document.querySelector('.nav-list');
+    
+    if (toggleButton && navList) {
+        toggleButton.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+
+        // Fermer le menu lors du clic sur un lien
+        const navLinks = navList.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navList.classList.remove('active');
+            });
+        });
+    }
+}
+
+
+// Lance le script une fois que le DOM est chargé
+document.addEventListener('DOMContentLoaded', init);
