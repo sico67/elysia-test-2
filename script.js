@@ -1,171 +1,329 @@
 // =========================================================================
-// SCRIPT DE DÉMARRAGE ET DE GESTION DE LA GALERIE
+// ELYSIA NATURE & SPA - SCRIPT PRINCIPAL OPTIMISÉ
 // =========================================================================
 
-let modalSwiperInstance = null; 
+let mainSwiperInstance = null;
+let modalSwiperInstance = null;
 
-function init() {
-    fetch('images.json')
-        .then(response => {
-            if (!response.ok) {
-                // Cette erreur se déclenche si images.json n'est pas à la racine.
-                throw new Error(`Erreur HTTP: ${response.status}. Le fichier images.json n'a pas été trouvé ou accessible.`);
-            }
-            return response.json();
-        })
-        .then(images => {
-            createGallery(images);
-        })
-        .catch(error => {
-            console.error('Erreur critique lors du chargement ou de l\'analyse de images.json:', error);
-            
-            const gallerySection = document.getElementById('photos');
-            
-            if (gallerySection) { 
-                gallerySection.innerHTML = `
-                    <div style="text-align:center; padding: 50px;">
-                        <h2 style="color:red; font-size: 1.5em;">
-                            Erreur de chargement des images.
-                        </h2>
-                        <p style="color:red; font-size: 1.2em; font-weight: bold; margin-top: 15px;">
-                            Veuillez vérifier le fichier images.json (SyntaxError) et les chemins d'accès (sensible à la casse sur GitHub Pages).
-                        </p>
-                        <p style="color: grey; margin-top: 15px; font-size: 0.9em;">
-                            Détail de l'erreur technique: ${error.message || 'Erreur inconnue'}
-                        </p>
-                    </div>
-                `;
-            } else {
-                console.error("Le conteneur de la galerie (#photos) est introuvable dans le HTML.");
-            }
-        });
+// =========================================================================
+// INITIALISATION AU CHARGEMENT DE LA PAGE
+// =========================================================================
+document.addEventListener('DOMContentLoaded', function() {
+    initGallery();
+    initMobileMenu();
+    initSmoothScroll();
+});
+
+// =========================================================================
+// CHARGEMENT ET CRÉATION DE LA GALERIE
+// =========================================================================
+async function initGallery() {
+    try {
+        const response = await fetch('images.json');
         
-    initMobileNav();
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: Le fichier images.json est introuvable ou inaccessible.`);
+        }
+        
+        const images = await response.json();
+        
+        if (!Array.isArray(images) || images.length === 0) {
+            throw new Error('Le fichier images.json est vide ou mal formaté.');
+        }
+        
+        buildGallery(images);
+        
+    } catch (error) {
+        console.error('Erreur lors du chargement de la galerie:', error);
+        displayGalleryError(error.message);
+    }
 }
 
-function createGallery(images) {
-    // Les conteneurs que le script cherche et ne trouve pas selon l'erreur dans la console.
+// =========================================================================
+// CONSTRUCTION DE LA GALERIE
+// =========================================================================
+function buildGallery(images) {
     const galleryWrapper = document.getElementById('gallery-wrapper');
     const modalWrapper = document.getElementById('modal-gallery-wrapper');
     
     if (!galleryWrapper || !modalWrapper) {
-        // Cette erreur est celle que vous voyez en console. Elle se déclenche si l'index.html n'est pas le bon.
-        console.error("Les conteneurs swiper (gallery-wrapper ou modal-gallery-wrapper) sont manquants dans le HTML. La galerie ne peut pas être créée.");
-        return; 
+        console.error('Erreur: Les conteneurs de la galerie sont introuvables dans le HTML.');
+        return;
     }
 
+    // Vider les conteneurs
     galleryWrapper.innerHTML = '';
     modalWrapper.innerHTML = '';
 
+    // Construire les slides
     images.forEach((image, index) => {
-        // --- 1. Carrousel Principal ---
-        const slide = document.createElement('div');
-        slide.classList.add('swiper-slide', 'gallery-item');
-        
-        const imgElement = document.createElement('img');
-        // CHEMIN D'ACCÈS CORRIGÉ : Retire "fotos/" 
-        imgElement.src = `${image.filename}`; 
-        imgElement.alt = image.caption;
-        imgElement.classList.add('carousel-img');
-        imgElement.setAttribute('data-index', index);
-        
-        const captionDiv = document.createElement('div');
-        captionDiv.classList.add('carousel-caption');
-        captionDiv.textContent = image.caption;
-
-        slide.appendChild(imgElement);
-        slide.appendChild(captionDiv);
+        // Slide du carrousel principal
+        const slide = createGallerySlide(image, index);
         galleryWrapper.appendChild(slide);
-
-
-        // --- 2. Modale (Lightbox) ---
-        const modalSlide = document.createElement('div');
-        modalSlide.classList.add('swiper-slide');
         
-        const modalImg = document.createElement('img');
-        // CHEMIN D'ACCÈS CORRIGÉ : Retire "fotos/"
-        modalImg.src = `${image.filename}`;
-        modalImg.alt = image.caption;
-        
-        modalSlide.appendChild(modalImg);
+        // Slide de la modale
+        const modalSlide = createModalSlide(image);
         modalWrapper.appendChild(modalSlide);
     });
 
-    // --- 3. Initialisation du Swiper principal ---
-    new Swiper('.mySwiper', { 
+    // Initialiser les carrousels Swiper
+    initMainSwiper();
+    initModalSwiper();
+    
+    // Activer la lightbox au clic
+    attachGalleryClickHandlers();
+}
+
+// =========================================================================
+// CRÉATION DES ÉLÉMENTS DE GALERIE
+// =========================================================================
+function createGallerySlide(image, index) {
+    const slide = document.createElement('div');
+    slide.classList.add('swiper-slide', 'gallery-item');
+    
+    const img = document.createElement('img');
+    img.src = `fotos/${image.filename}`;
+    img.alt = image.caption;
+    img.classList.add('carousel-img');
+    img.setAttribute('data-index', index);
+    img.loading = 'lazy';
+    
+    const caption = document.createElement('div');
+    caption.classList.add('carousel-caption');
+    caption.textContent = image.caption;
+    
+    slide.appendChild(img);
+    slide.appendChild(caption);
+    
+    return slide;
+}
+
+function createModalSlide(image) {
+    const slide = document.createElement('div');
+    slide.classList.add('swiper-slide');
+    
+    const img = document.createElement('img');
+    img.src = `fotos/${image.filename}`;
+    img.alt = image.caption;
+    
+    slide.appendChild(img);
+    
+    return slide;
+}
+
+// =========================================================================
+// INITIALISATION DU CARROUSEL PRINCIPAL
+// =========================================================================
+function initMainSwiper() {
+    mainSwiperInstance = new Swiper('.mySwiper', {
         loop: true,
-        spaceBetween: 30,
+        spaceBetween: 0,
         centeredSlides: true,
         autoplay: {
-            delay: 5000,
+            delay: 4000,
             disableOnInteraction: false,
+            pauseOnMouseEnter: true,
         },
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
+            dynamicBullets: true,
         },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
-        keyboard: true,
+        keyboard: {
+            enabled: true,
+        },
+        effect: 'slide',
+        speed: 600,
     });
+}
 
-    // --- 4. Initialisation de la Modale Swiper ---
+// =========================================================================
+// INITIALISATION DU CARROUSEL MODAL
+// =========================================================================
+function initModalSwiper() {
     modalSwiperInstance = new Swiper('.modal-swiper-container', {
         loop: true,
         navigation: {
             nextEl: '.modal-nav-next',
             prevEl: '.modal-nav-prev',
         },
-        keyboard: true,
-        mousewheel: true,
+        keyboard: {
+            enabled: true,
+        },
+        mousewheel: {
+            forceToAxis: true,
+        },
+        speed: 400,
     });
+}
 
-    // --- 5. Gestion de la Modale ---
-    const carouselImages = document.querySelectorAll('.carousel-img');
+// =========================================================================
+// GESTION DE LA LIGHTBOX (MODALE)
+// =========================================================================
+function attachGalleryClickHandlers() {
+    const galleryImages = document.querySelectorAll('.carousel-img');
     const modal = document.getElementById('image-modal');
-    const closeBtn = document.querySelector('.close-btn');
-
-    carouselImages.forEach(img => {
+    const closeBtn = modal.querySelector('.close-btn');
+    
+    // Ouvrir la modale au clic sur une image
+    galleryImages.forEach(img => {
         img.addEventListener('click', function() {
             const index = parseInt(this.getAttribute('data-index'));
-            modal.style.display = 'flex';
-            document.body.classList.add('modal-open');
-            if (modalSwiperInstance) {
-                modalSwiperInstance.slideToLoop(index);
-            }
+            openModal(index);
         });
     });
-
-    closeBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-        document.body.classList.remove('modal-open');
-    });
-
+    
+    // Fermer la modale
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Fermer avec la touche Escape
     document.addEventListener('keydown', function(e) {
-        if (e.key === "Escape" && modal.style.display === 'flex') {
-            modal.style.display = 'none';
-            document.body.classList.remove('modal-open');
+        if (e.key === 'Escape' && modal.style.display === 'flex') {
+            closeModal();
+        }
+    });
+    
+    // Fermer en cliquant en dehors de l'image
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
         }
     });
 }
 
-function initMobileNav() {
-    const toggleButton = document.querySelector('.mobile-menu-toggle');
-    const navList = document.querySelector('.nav-list');
+function openModal(index) {
+    const modal = document.getElementById('image-modal');
+    modal.style.display = 'flex';
+    document.body.classList.add('modal-open');
     
-    if (toggleButton && navList) {
-        toggleButton.addEventListener('click', () => {
-            navList.classList.toggle('active');
-        });
-        const navLinks = navList.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navList.classList.remove('active');
-            });
-        });
+    if (modalSwiperInstance) {
+        modalSwiperInstance.slideToLoop(index, 0);
     }
 }
 
-document.addEventListener('DOMContentLoaded', init);
+function closeModal() {
+    const modal = document.getElementById('image-modal');
+    modal.style.display = 'none';
+    document.body.classList.remove('modal-open');
+}
+
+// =========================================================================
+// AFFICHAGE D'ERREUR POUR LA GALERIE
+// =========================================================================
+function displayGalleryError(message) {
+    const gallerySection = document.getElementById('photos');
+    
+    if (gallerySection) {
+        const errorDiv = document.createElement('div');
+        errorDiv.style.cssText = 'text-align: center; padding: 50px; background: #fee; border-radius: 10px; margin: 20px;';
+        
+        errorDiv.innerHTML = `
+            <h3 style="color: #c00; margin-bottom: 15px;">
+                ⚠️ Erreur de chargement de la galerie
+            </h3>
+            <p style="color: #600; font-size: 1.1em; margin-bottom: 10px;">
+                ${message}
+            </p>
+            <p style="color: #666; font-size: 0.9em;">
+                Vérifiez que le fichier <strong>images.json</strong> existe à la racine du site 
+                et que le dossier <strong>fotos/</strong> contient les images.
+            </p>
+        `;
+        
+        const container = gallerySection.querySelector('.container');
+        container.appendChild(errorDiv);
+    }
+}
+
+// =========================================================================
+// MENU MOBILE
+// =========================================================================
+function initMobileMenu() {
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+    const navList = document.querySelector('.nav-list');
+    
+    if (!toggleButton || !navList) return;
+    
+    // Toggle du menu
+    toggleButton.addEventListener('click', function() {
+        navList.classList.toggle('active');
+        const icon = this.querySelector('.material-icons');
+        icon.textContent = navList.classList.contains('active') ? 'close' : 'menu';
+    });
+    
+    // Fermer le menu au clic sur un lien
+    const navLinks = navList.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            navList.classList.remove('active');
+            const icon = toggleButton.querySelector('.material-icons');
+            icon.textContent = 'menu';
+        });
+    });
+    
+    // Fermer le menu si on clique ailleurs
+    document.addEventListener('click', function(e) {
+        if (!toggleButton.contains(e.target) && !navList.contains(e.target)) {
+            navList.classList.remove('active');
+            const icon = toggleButton.querySelector('.material-icons');
+            icon.textContent = 'menu';
+        }
+    });
+}
+
+// =========================================================================
+// SMOOTH SCROLL POUR LES ANCRES
+// =========================================================================
+function initSmoothScroll() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                e.preventDefault();
+                
+                const headerOffset = 80;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// =========================================================================
+// OPTIMISATION: LAZY LOADING DES IMAGES
+// =========================================================================
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                }
+                observer.unobserve(img);
+            }
+        });
+    });
+    
+    // Observer les images avec data-src (si vous en ajoutez)
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
