@@ -44,10 +44,10 @@ header {
     align-items: center;
 }
 
-/* CORRECTION CRITIQUE DU LOGO */
+/* CORRECTION CRITIQUE DU LOGO (AJOUT DE !important) */
 .logo-img {
-    width: auto;
-    height: 35px; /* Limite la hauteur du logo */
+    width: auto !important; /* Force la largeur */
+    height: 35px !important; /* Force la hauteur à 35px pour éviter le débordement */
     margin-right: 10px;
 }
 
