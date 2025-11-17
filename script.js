@@ -8,6 +8,7 @@ function init() {
     fetch('images.json')
         .then(response => {
             if (!response.ok) {
+                // Cette erreur se déclenche si images.json n'est pas à la racine.
                 throw new Error(`Erreur HTTP: ${response.status}. Le fichier images.json n'a pas été trouvé ou accessible.`);
             }
             return response.json();
@@ -43,10 +44,12 @@ function init() {
 }
 
 function createGallery(images) {
+    // Les conteneurs que le script cherche et ne trouve pas selon l'erreur dans la console.
     const galleryWrapper = document.getElementById('gallery-wrapper');
     const modalWrapper = document.getElementById('modal-gallery-wrapper');
     
     if (!galleryWrapper || !modalWrapper) {
+        // Cette erreur est celle que vous voyez en console. Elle se déclenche si l'index.html n'est pas le bon.
         console.error("Les conteneurs swiper (gallery-wrapper ou modal-gallery-wrapper) sont manquants dans le HTML. La galerie ne peut pas être créée.");
         return; 
     }
@@ -60,7 +63,7 @@ function createGallery(images) {
         slide.classList.add('swiper-slide', 'gallery-item');
         
         const imgElement = document.createElement('img');
-        // CORRECTION DU CHEMIN : Retire "fotos/" 
+        // CHEMIN D'ACCÈS CORRIGÉ : Retire "fotos/" 
         imgElement.src = `${image.filename}`; 
         imgElement.alt = image.caption;
         imgElement.classList.add('carousel-img');
@@ -80,7 +83,7 @@ function createGallery(images) {
         modalSlide.classList.add('swiper-slide');
         
         const modalImg = document.createElement('img');
-        // CORRECTION DU CHEMIN : Retire "fotos/"
+        // CHEMIN D'ACCÈS CORRIGÉ : Retire "fotos/"
         modalImg.src = `${image.filename}`;
         modalImg.alt = image.caption;
         
