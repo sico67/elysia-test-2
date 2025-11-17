@@ -2,15 +2,15 @@
 // SCRIPT DE DÉMARRAGE ET DE GESTION DE LA GALERIE
 // =========================================================================
 
-let modalSwiperInstance = null; // Instance du Swiper de la Modale
+let modalSwiperInstance = null; 
 
 function init() {
     // 1. Charger les données de la galerie depuis images.json
+    // Le chemin "images.json" est relatif à index.html et devrait fonctionner sur GitHub Pages
     fetch('images.json')
         .then(response => {
             if (!response.ok) {
-                // Si le réseau échoue (404 Not Found, etc.)
-                throw new Error(`Erreur HTTP: ${response.status}. Le fichier images.json n'a pas été trouvé à la racine.`);
+                throw new Error(`Erreur HTTP: ${response.status}. Le fichier images.json n'a pas été trouvé ou accessible.`);
             }
             return response.json();
         })
@@ -21,7 +21,7 @@ function init() {
         .catch(error => {
             console.error('Erreur critique lors du chargement ou de l\'analyse de images.json:', error);
             
-            // Gestion d'erreur robuste pour ne pas planter l'affichage
+            // Affichage de l'erreur dans la section si elle est trouvée
             const gallerySection = document.getElementById('photos');
             
             if (gallerySection) { 
@@ -31,7 +31,7 @@ function init() {
                             Erreur de chargement des images.
                         </h2>
                         <p style="color:red; font-size: 1.2em; font-weight: bold; margin-top: 15px;">
-                            Veuillez vérifier le fichier images.json (SyntaxError ou 404 Not Found).
+                            Veuillez vérifier le fichier images.json (SyntaxError) et le nom des fichiers images (sensible à la casse sur GitHub Pages).
                         </p>
                         <p style="color: grey; margin-top: 15px; font-size: 0.9em;">
                             Détail de l'erreur technique: ${error.message || 'Erreur inconnue'}
@@ -51,7 +51,6 @@ function createGallery(images) {
     const galleryWrapper = document.getElementById('gallery-wrapper');
     const modalWrapper = document.getElementById('modal-gallery-wrapper');
     
-    // Vérification des conteneurs HTML (pour éviter le bug actuel)
     if (!galleryWrapper || !modalWrapper) {
         console.error("Les conteneurs swiper (gallery-wrapper ou modal-gallery-wrapper) sont manquants dans le HTML. La galerie ne peut pas être créée.");
         return; 
@@ -66,7 +65,7 @@ function createGallery(images) {
         slide.classList.add('swiper-slide', 'gallery-item');
         
         const imgElement = document.createElement('img');
-        // CHEMIN VERS LE DOSSIER 'fotos'
+        // CHEMIN D'ACCÈS CLÉ
         imgElement.src = `fotos/${image.filename}`; 
         imgElement.alt = image.caption;
         imgElement.classList.add('carousel-img');
@@ -86,7 +85,7 @@ function createGallery(images) {
         modalSlide.classList.add('swiper-slide');
         
         const modalImg = document.createElement('img');
-        // CHEMIN VERS LE DOSSIER 'fotos'
+        // CHEMIN D'ACCÈS CLÉ
         modalImg.src = `fotos/${image.filename}`;
         modalImg.alt = image.caption;
         
@@ -141,13 +140,11 @@ function createGallery(images) {
         });
     });
 
-    // Fermeture de la modale
     closeBtn.addEventListener('click', function() {
         modal.style.display = 'none';
         document.body.classList.remove('modal-open');
     });
 
-    // Fermeture par la touche Échap
     document.addEventListener('keydown', function(e) {
         if (e.key === "Escape" && modal.style.display === 'flex') {
             modal.style.display = 'none';
