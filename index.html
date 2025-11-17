@@ -131,7 +131,8 @@
                 <h2>Localisation & Accès 🗺️</h2>
                 <p class="main-location-text">
                     Le Duplex Elysia est situé dans un cadre exceptionnel, au cœur des **Hauts de Klingenthal**.
-                    Vous bénéficiez du calme d'une zone boisée tout en étant proche des sites majeurs alsaciens.
+                    Vous bénéficiez du calme d'une **zone boisée** avec des départs immédiats de **randonnées et de promenades** dans les bois.
+                    Un site d'escalade important est également accessible à **20 minutes à pied**.
                 </p>
 
                 <div class="map-container">
@@ -146,7 +147,6 @@
                         aria-label="Localisation du Duplex Elysia, Hauts de Klingenthal">
                     </iframe>
                 </div>
-
                 <h3 style="margin-top: 50px;">Les Avantages de la Résidence</h3>
                 
                 <div class="amenities-grid">
@@ -277,12 +277,10 @@
             let mySwiperInstance; 
             let modalSwiperInstance; 
             
-            // --- NOUVELLE ÉTAPE 1 : CHARGEMENT ASYNCHRONE DES DONNÉES JSON ---
-            // Le reste du script est enveloppé dans une fonction asynchrone pour attendre le chargement des images.
-            
+            // --- CHARGEMENT ASYNCHRONE DES DONNÉES JSON ---
             async function initializeGallery() {
                 let allImagesData = [];
-                const jsonPath = 'images.json'; // Assurez-vous que le chemin est correct
+                const jsonPath = 'images.json'; 
 
                 try {
                     const response = await fetch(jsonPath);
@@ -291,7 +289,6 @@
                     }
                     allImagesData = await response.json();
                     
-                    // Si le chargement est réussi, on passe à l'étape de construction
                     buildGallery(allImagesData);
                     
                 } catch (error) {
@@ -300,14 +297,13 @@
                 }
             }
             
-            // --- NOUVELLE ÉTAPE 2 : FONCTION DE CONSTRUCTION DE LA GALERIE ---
+            // --- FONCTION DE CONSTRUCTION DE LA GALERIE ---
             function buildGallery(imagesData) {
                 if (imagesData.length === 0) {
                     gallerySwiperWrapper.innerHTML = `<p style="text-align:center; color: red;">Erreur: Aucune image dans le fichier JSON. La galerie est vide.</p>`;
                     return;
                 }
                 
-                // 2.1 Construction du carrousel principal
                 imagesData.forEach((image) => {
                     const slideDiv = document.createElement('div');
                     slideDiv.classList.add('swiper-slide', 'gallery-item');
@@ -319,7 +315,6 @@
                     gallerySwiperWrapper.appendChild(slideDiv);
                 });
 
-                // 2.2 Initialisation du Carrousel Swiper 
                 mySwiperInstance = new Swiper('.mySwiper', {
                     loop: true, 
                     navigation: {
@@ -334,22 +329,20 @@
                     spaceBetween: 0,
                 });
                 
-                // 2.3 Ajout des écouteurs de clic pour la Lightbox
                 addGalleryClickListeners(imagesData);
             }
             
 
             
-            // --- Étape 3 : Logique de la Lightbox (mise à jour pour utiliser les données passées) ---
+            // --- Logique de la Lightbox ---
             function addGalleryClickListeners(imagesData) {
                 const gallerySlides = document.querySelectorAll("#gallery-swiper-wrapper .swiper-slide");
 
                 gallerySlides.forEach((slide, index) => {
                     slide.addEventListener("click", () => {
                         
-                        // 3.1 Construction des slides pour la modale
                         modalSwiperWrapper.innerHTML = ''; 
-                        imagesData.forEach(image => { // Utilise les données chargées
+                        imagesData.forEach(image => {
                             const slideDiv = document.createElement('div');
                             slideDiv.classList.add('swiper-slide');
                             
@@ -360,7 +353,6 @@
                             modalSwiperWrapper.appendChild(slideDiv);
                         });
 
-                        // 3.2 Initialiser Swiper pour la modale
                         if (modalSwiperInstance) {
                             modalSwiperInstance.destroy(true, true);
                         }
@@ -376,11 +368,9 @@
                             spaceBetween: 0
                         });
 
-                        // 3.3 Afficher la modale et bloquer le scroll du body
                         modal.style.display = "flex";
                         document.body.style.overflow = "hidden";
                         
-                        // Fix final du redimensionnement de la modale
                         if (modalSwiperInstance) {
                                modalSwiperInstance.update(); 
                         }
@@ -389,7 +379,7 @@
                 });
             }
 
-            // --- Étape 4 : Fermeture de la Lightbox ---
+            // --- Fermeture de la Lightbox ---
             if (modal) {
                 if (closeBtn) {
                     closeBtn.addEventListener("click", closeModal);
@@ -412,23 +402,28 @@
             }
             
 
-            // --- Menu mobile ---
+            // --- Menu mobile (CORRIGÉ) ---
             const mobileToggle = document.querySelector(".mobile-menu-toggle");
             const navList = document.querySelector(".nav-list");
             
             if (mobileToggle) {
                 mobileToggle.addEventListener("click", () => {
+                    // C'est l'ajout/retrait de la classe 'active' qui ouvre/ferme le menu
                     navList.classList.toggle("active");
                     const icon = mobileToggle.querySelector(".material-icons");
+                    // Change l'icône entre 'menu' et 'close'
                     icon.textContent = navList.classList.contains("active") ? "close" : "menu";
                 });
             }
 
+            // Fermeture automatique du menu lors d'un clic sur un lien
             document.querySelectorAll(".nav-list a").forEach(link => {
                 link.addEventListener("click", () => {
-                    navList.classList.remove("active");
-                    if (mobileToggle) {
-                        mobileToggle.querySelector(".material-icons").textContent = "menu";
+                    if (navList.classList.contains("active")) {
+                         navList.classList.remove("active");
+                         if (mobileToggle) {
+                            mobileToggle.querySelector(".material-icons").textContent = "menu";
+                        }
                     }
                 });
             });
