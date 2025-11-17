@@ -60,7 +60,7 @@ function createGallery(images) {
         slide.classList.add('swiper-slide', 'gallery-item');
         
         const imgElement = document.createElement('img');
-        // CHEMIN D'ACCÈS CORRIGÉ : Retire "fotos/" 
+        // CORRECTION DU CHEMIN : Retire "fotos/" 
         imgElement.src = `${image.filename}`; 
         imgElement.alt = image.caption;
         imgElement.classList.add('carousel-img');
@@ -80,7 +80,7 @@ function createGallery(images) {
         modalSlide.classList.add('swiper-slide');
         
         const modalImg = document.createElement('img');
-        // CHEMIN D'ACCÈS CORRIGÉ : Retire "fotos/"
+        // CORRECTION DU CHEMIN : Retire "fotos/"
         modalImg.src = `${image.filename}`;
         modalImg.alt = image.caption;
         
