@@ -8,7 +8,7 @@
         "caption": "Salon et terrasse avec vue montagne."
     },
     {
-        "filename": "sauna_interieur.jpeg",
+        "filename": "sauna-interieur.jpg",
         "caption": "Sauna infrarouge 4 places privatif."
     },
     {
@@ -24,7 +24,7 @@
         "caption": "Détail du lit et de la décoration."
     },
     {
-        "filename": "cuisine_microonde.jpeg",
+        "filename": "cuisine-microonde.jpeg",
         "caption": "Kitchenette équipée et fonctionnelle."
     },
     {
@@ -40,32 +40,32 @@
         "caption": "Détail de la salle de bain."
     },
     {
-        "filename": "vue_montagne.jpeg",
+        "filename": "vue-montagne.jpeg",
         "caption": "Vue imprenable depuis la terrasse."
     },
     {
-        "filename": "exterieur_foret.jpeg",
+        "filename": "exterieur-foret.jpeg",
         "caption": "Le calme de la forêt alsacienne."
     },
     {
-        "filename": "adresse rbnb.jpeg",
+        "filename": "adresse_rbnb.jpeg",
         "caption": "Façade de l'établissement (pour repérage)."
     },
     {
-        "filename": "baignoire balneo.jpeg",
+        "filename": "balneo.jpg",
         "caption": "Baignoire Balnéo 2 places avec vue."
     },
     {
-        "filename": "chambre-lit.jpeg",
-        "caption": "Vue complète de la chambre à l'étage."
+        "filename": "chambre-velux.jpeg",
+        "caption": "Fenêtre Velux avec vue sur le village."
     },
     {
-        "filename": "douche italienne.jpeg",
+        "filename": "douche-italienne.jpeg",
         "caption": "Autre angle de la douche italienne."
     },
     {
-        "filename": "exterieur-balneo.jpeg",
-        "caption": "Vue de la baignoire balnéo depuis la nature."
+        "filename": "escalier-entrée.jpeg",
+        "caption": "Escalier d'accès éclairé."
     },
     {
         "filename": "facade.jpeg",
@@ -74,10 +74,6 @@
     {
         "filename": "logo.jpeg",
         "caption": "Logo Officiel Elysia Nature & Spa."
-    },
-    {
-        "filename": "mural-tv.jpeg",
-        "caption": "Détail du mur TV et décoration."
     },
     {
         "filename": "piscine.jpeg",
@@ -100,7 +96,7 @@
         "caption": "Espace toilettes au rez-de-chaussée."
     },
     {
-        "filename": "vue montagne.jpeg",
-        "caption": "Vue panoramique des montagnes alsaciennes."
+        "filename": "carrelage-detail.jpeg",
+        "caption": "Détail du carrelage et lavabo."
     }
 ]
