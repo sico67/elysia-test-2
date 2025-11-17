@@ -190,7 +190,8 @@ section {
 }
 
 .elysia-wall-bg {
-    background-image: url('mur_elysia_bg.jpeg');
+    /* CORRECTION CRUCIALE : Chemin vers le nouveau dossier "fotos" */
+    background-image: url('fotos/mur_elysia_bg.jpeg'); 
     background-size: cover;
     background-position: center center;
 }
