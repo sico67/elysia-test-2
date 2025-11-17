@@ -1,751 +1,254 @@
-/* ============================================
-   ELYSIA NATURE & SPA - STYLES OPTIMISÉS
-   ============================================ */
-
-:root {
-    --color-primary: #8B4513;
-    --color-secondary: #000000;
-    --color-accent: #DAA520;
-    --color-white: #ffffff;
-    --color-background-light: #f4f4f4;
-    --color-text-dark: #333333;
-    --color-text-light: #ffffff;
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Inter', sans-serif;
-    --transition-duration: 0.3s;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* ============================================
-   RESET & BASE
-   ============================================ */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: var(--font-body);
-    color: var(--color-text-dark);
-    line-height: 1.6;
-    background-color: var(--color-white);
-    overflow-x: hidden;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-h1, h2, h3, h4 {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-secondary);
-}
-
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-a {
-    text-decoration: none;
-    transition: all var(--transition-duration);
-}
-
-/* ============================================
-   HEADER & NAVIGATION
-   ============================================ */
-
-.main-header {
-    background-color: var(--color-white);
-    box-shadow: var(--shadow-sm);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.main-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    color: var(--color-secondary);
-    font-size: 1.5em;
-    font-weight: 600;
-    font-family: var(--font-heading);
-}
-
-.logo .material-icons {
-    color: var(--color-accent);
-    margin-right: 8px;
-    font-size: 1.3em;
-}
-
-.logo-accent {
-    color: var(--color-accent);
-}
-
-.main-nav {
-    display: flex;
-    align-items: center;
-}
-
-.nav-list {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.nav-list li a {
-    color: var(--color-text-dark);
-    padding: 10px 15px;
-    display: block;
-    border-radius: 5px;
-}
-
-.nav-list li a:hover {
-    color: var(--color-accent);
-    background-color: rgba(218, 165, 32, 0.1);
-}
-
-.cta-button {
-    background-color: var(--color-primary);
-    color: var(--color-white) !important;
-    padding: 10px 20px !important;
-    border-radius: 5px;
-    font-weight: 600;
-}
-
-.cta-button:hover {
-    background-color: #6a3410;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-/* Menu Mobile */
-.mobile-menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.8em;
-    cursor: pointer;
-    color: var(--color-secondary);
-    padding: 5px;
-}
-
-@media (max-width: 900px) {
-    .nav-list {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: var(--color-white);
-        box-shadow: var(--shadow-md);
-        padding: 10px 0;
-        gap: 0;
-    }
-
-    .nav-list.active {
-        display: flex;
-    }
-
-    .nav-list li {
-        width: 100%;
-        text-align: center;
-        border-top: 1px solid #eee;
-    }
-
-    .nav-list li a {
-        padding: 15px;
-    }
-
-    .mobile-menu-toggle {
-        display: block;
-    }
-
-    .cta-button {
-        margin: 10px 20px !important;
-    }
-}
-
-/* ============================================
-   BOUTONS CTA
-   ============================================ */
-
-.cta-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background-color: var(--color-primary);
-    color: var(--color-white) !important;
-    padding: 12px 25px;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.cta-primary:hover {
-    background-color: #6a3410;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-.cta-primary.large {
-    font-size: 1.1em;
-    padding: 15px 30px;
-}
-
-/* ============================================
-   SECTIONS
-   ============================================ */
-
-section {
-    padding: 80px 0;
-}
-
-h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    font-size: 2.5em;
-    color: var(--color-secondary);
-}
-
-@media (max-width: 768px) {
-    section {
-        padding: 50px 0;
-    }
-
-    h2 {
-        font-size: 2em;
-        margin-bottom: 30px;
-    }
-}
-
-/* ============================================
-   SECTION HERO
-   ============================================ */
-
-.hero-section {
-    background-image: url('mur-elysia-bg.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    height: 90vh;
-    min-height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    color: var(--color-white);
-    text-align: center;
-}
-
-.hero-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5));
-    z-index: 1;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
-}
-
-.hero-content h1 {
-    font-size: 3.5em;
-    color: var(--color-white);
-    margin-bottom: 20px;
-    animation: fadeInUp 1s ease-out;
-}
-
-.hero-subtitle {
-    font-size: 1.3em;
-    margin-bottom: 30px;
-    font-weight: 400;
-    animation: fadeInUp 1s ease-out 0.2s backwards;
-}
-
-.hero-content .cta-primary {
-    animation: fadeInUp 1s ease-out 0.4s backwards;
-}
-
-.scroll-indicator {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--color-white);
-    opacity: 0.8;
-    animation: bounce 2s infinite;
-    z-index: 2;
-}
-
-.scroll-indicator .material-icons {
-    font-size: 2.5em;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translate(-50%, 0);
-    }
-    40% {
-        transform: translate(-50%, -10px);
-    }
-    60% {
-        transform: translate(-50%, -5px);
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-section {
-        background-attachment: scroll;
-        height: 80vh;
-    }
-
-    .hero-content h1 {
-        font-size: 2.2em;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1em;
-    }
-}
-
-/* ============================================
-   SECTION DESCRIPTION & FEATURES
-   ============================================ */
-
-.description-section {
-    background-color: var(--color-background-light);
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.feature-card {
-    background-color: var(--color-white);
-    padding: 35px 25px;
-    border-radius: 10px;
-    box-shadow: var(--shadow-md);
-    text-align: center;
-    transition: all var(--transition-duration);
-}
-
-.feature-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
-}
-
-.feature-card .material-icons {
-    font-size: 3.5em;
-    color: var(--color-accent);
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    font-size: 1.4em;
-    margin-bottom: 15px;
-}
-
-.feature-card p {
-    font-size: 0.95em;
-    line-height: 1.7;
-}
-
-/* ============================================
-   SECTION SPA & BIEN-ÊTRE
-   ============================================ */
-
-.spa-section {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-    color: var(--color-text-light);
-}
-
-.spa-section h2 {
-    color: var(--color-accent);
-}
-
-.spa-features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.spa-feature {
-    text-align: center;
-    padding: 30px;
-    border: 2px solid rgba(218, 165, 32, 0.3);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    transition: all var(--transition-duration);
-}
-
-.spa-feature:hover {
-    border-color: var(--color-accent);
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-5px);
-}
-
-.spa-feature .material-icons {
-    font-size: 4em;
-    color: var(--color-accent);
-    margin-bottom: 20px;
-}
-
-.spa-feature h3 {
-    color: var(--color-white);
-    font-size: 1.6em;
-    margin-bottom: 15px;
-}
-
-.spa-feature p {
-    font-size: 1em;
-    line-height: 1.7;
-}
-
-/* ============================================
-   SECTION LOCALISATION
-   ============================================ */
-
-.localisation-section {
-    background-color: var(--color-white);
-}
-
-.map-container {
-    margin: 40px 0;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.main-location-text {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 1.1em;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.amenities-grid,
-.access-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
-}
-
-.amenity-card,
-.access-card {
-    background-color: var(--color-background-light);
-    padding: 25px;
-    border-radius: 10px;
-    text-align: center;
-    transition: all var(--transition-duration);
-    border: 2px solid transparent;
-}
-
-.amenity-card:hover,
-.access-card:hover {
-    border-color: var(--color-accent);
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-md);
-}
-
-.amenity-card .material-icons {
-    font-size: 3em;
-    color: var(--color-primary);
-    margin-bottom: 15px;
-}
-
-.amenity-card h4,
-.access-card h4 {
-    margin: 10px 0;
-    color: var(--color-secondary);
-    font-size: 1.2em;
-}
-
-.amenity-card p,
-.access-card p {
-    font-size: 0.95em;
-}
-
-/* ============================================
-   SECTION GALERIE
-   ============================================ */
-
-.gallery-section {
-    background-color: var(--color-background-light);
-}
-
-.gallery-section > .container > p {
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 1.1em;
-    color: var(--color-text-dark);
-}
-
-.carousel-container {
-    max-width: 900px;
-    margin: 0 auto;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-}
-
-.gallery-item {
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-.carousel-img {
-    width: 100%;
-    height: 550px;
-    object-fit: cover;
-    transition: transform var(--transition-duration);
-}
-
-.gallery-item:hover .carousel-img {
-    transform: scale(1.05);
-}
-
-.carousel-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    color: var(--color-white);
-    padding: 30px 20px 15px;
-    text-align: center;
-    font-style: italic;
-    font-size: 1em;
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-    color: var(--color-primary) !important;
-    background-color: rgba(255, 255, 255, 0.9);
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-}
-
-.swiper-button-prev:after,
-.swiper-button-next:after {
-    font-size: 20px !important;
-}
-
-.swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background: rgba(255, 255, 255, 0.7);
-}
-
-.swiper-pagination-bullet-active {
-    background: var(--color-primary) !important;
-}
-
-@media (max-width: 768px) {
-    .carousel-img {
-        height: 400px;
-    }
-}
-
-/* ============================================
-   SECTION CALENDRIER
-   ============================================ */
-
-.calendar-section {
-    background-color: var(--color-white);
-}
-
-.calendar-container {
-    max-width: 900px;
-    margin: 30px auto;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-}
-
-.cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
-    flex-wrap: wrap;
-}
-
-/* ============================================
-   SECTION CTA FINALE
-   ============================================ */
-
-.cta-section {
-    background: linear-gradient(135deg, var(--color-primary) 0%, #6a3410 100%);
-    text-align: center;
-    color: var(--color-white);
-}
-
-.cta-section h2 {
-    color: var(--color-white);
-    margin-bottom: 20px;
-}
-
-.cta-section .main-location-text {
-    color: var(--color-white);
-    margin-bottom: 30px;
-}
-
-/* ============================================
-   FOOTER
-   ============================================ */
-
-footer {
-    background-color: var(--color-secondary);
-    color: var(--color-text-light);
-    padding: 30px 0;
-    font-size: 0.95em;
-}
-
-footer .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.footer-nav {
-    display: flex;
-    gap: 20px;
-}
-
-.footer-nav a {
-    color: var(--color-accent);
-}
-
-.footer-nav a:hover {
-    color: var(--color-white);
-}
-
-@media (max-width: 768px) {
-    footer .container {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-/* ============================================
-   LIGHTBOX (MODALE)
-   ============================================ */
-
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 2000;
-    background-color: rgba(0, 0, 0, 0.95);
-    align-items: center;
-    justify-content: center;
-}
-
-.modal.active {
-    display: flex;
-}
-
-body.modal-open {
-    overflow: hidden;
-}
-
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 2001;
-    transition: all var(--transition-duration);
-    line-height: 1;
-}
-
-.close-btn:hover {
-    color: var(--color-accent);
-    transform: rotate(90deg);
-}
-
-.modal-swiper-container {
-    width: 90%;
-    max-width: 1200px;
-    height: 85vh;
-}
-
-.modal-swiper-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.modal-nav-prev,
-.modal-nav-next {
-    color: #f1f1f1 !important;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.modal-nav-prev:hover,
-.modal-nav-next:hover {
-    background-color: rgba(139, 69, 19, 0.8);
-}
-
-@media (max-width: 768px) {
-    .close-btn {
-        top: 10px;
-        right: 15px;
-        font-size: 40px;
-    }
-
-    .modal-swiper-container {
-        width: 95%;
-        height: 80vh;
-    }
-}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elysia Nature & Spa - Duplex de Luxe | Noir & Bronze</title>
+    <meta name="description" content="Duplex de luxe à Boersch avec spa privatif. Sauna infrarouge, baignoire balnéo, terrasse vue montagne. Style Black & Bronze.">
+    <meta property="og:title" content="Elysia Nature & Spa - Location d'exception">
+    <meta property="og:description" content="Parenthèse de bien-être au cœur des Vosges du Nord">
+    <meta property="og:image" content="salon-terrasse.jpeg">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="material-icons">spa</span>
+                <span class="logo-text">ELY<span class="logo-accent">SIA</span></span>
+            </a>
+            <nav class="main-nav">
+                <button class="mobile-menu-toggle" aria-label="Menu mobile">
+                    <span class="material-icons">menu</span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#description">Le Duplex</a></li>
+                    <li><a href="#bien-etre">Spa Privé</a></li>
+                    <li><a href="#photos">Galerie</a></li>
+                    <li><a href="#localisation">Localisation</a></li> 
+                    <li><a href="#disponibilites">Disponibilités</a></li>
+                    <li><a href="#reservation" class="cta-button">Réserver</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="accueil" class="hero-section">
+            <div class="hero-content container">
+                <h1>Votre Évasion à <strong>Elysia Nature & Spa</strong></h1>
+                <p class="hero-subtitle">Duplex de luxe, cocon de sérénité au cœur des montagnes de Boersch</p>
+                <a href="#reservation" class="cta-primary large">
+                    <span class="material-icons">event_available</span>
+                    Réserver votre séjour
+                </a>
+            </div>
+            <div class="scroll-indicator">
+                <span class="material-icons">expand_more</span>
+            </div>
+        </section>
+
+        <section id="description" class="description-section">
+            <div class="container">
+                <h2>Un Duplex Conçu pour le Luxe et la Détente</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="material-icons">king_bed</span>
+                        <h3>L'Étage : Espace Nuit</h3>
+                        <p>Une chambre cosy avec <strong>lit King Size</strong> pour des nuits réparatrices. Ambiance feutrée et vues discrètes sur la nature.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="material-icons">event_seat</span>
+                        <h3>Le Rez-de-Chaussée : Salon</h3>
+                        <p>Coin détente moderne avec TV connectée et <strong>canapé convertible</strong> confortable pouvant accueillir 2 personnes supplémentaires.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="material-icons">balcony</span>
+                        <h3>Terrasse Privative</h3>
+                        <p><strong>Terrasse sans vis-à-vis</strong> avec vue imprenable sur les montagnes. Parfait pour l'apéritif.</p>
+                    </div>
+                    <div class="feature-card"> 
+                        <span class="material-icons">microwave</span>
+                        <h3>Kitchenette Équipée</h3>
+                        <p>Micro-onde, réfrigérateur, plaque à induction et cafetière à dosette (café et thés offerts).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bien-etre" class="spa-section">
+            <div class="container">
+                <h2>Espace Bien-être Privatif au RDC</h2>
+                <div class="spa-features-grid">
+                    <div class="spa-feature">
+                        <span class="material-icons">hot_tub</span>
+                        <h3>Baignoire Balnéo</h3>
+                        <p>Grande <strong>baignoire Balnéo 2 places</strong> avec vue sur la nature.</p>
+                    </div>
+                    <div class="spa-feature">
+                        <span class="material-icons">sauna</span>
+                        <h3>Sauna Infrarouge</h3>
+                        <p><strong>Sauna infrarouge 4 places</strong> pour une détoxification complète.</p>
+                    </div>
+                    <div class="spa-feature">
+                        <span class="material-icons">shower</span>
+                        <h3>Douche à l'Italienne</h3>
+                        <p>Luxueuse <strong>douche à l'italienne</strong> cuivrée après le sauna.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="photos" class="gallery-section">
+            <div class="container">
+                <h2>Galerie Photo</h2>
+                <p>Découvrez en images le cadre d'exception d'Elysia Nature & Spa.</p>
+                
+                <div class="swiper mySwiper carousel-container">
+                    <div class="swiper-wrapper" id="gallery-wrapper"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="localisation" class="localisation-section">
+            <div class="container">
+                <h2>Localisation & Accès 🗺️</h2>
+                <p class="main-location-text">
+                    Le Duplex Elysia est situé dans un cadre exceptionnel, au cœur des <strong>Hauts de Klingenthal</strong>.
+                    Vous bénéficiez du calme d'une zone boisée tout en étant proche des sites majeurs alsaciens.
+                </p>
+
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10452.029831968846!2d7.39956425!3d48.44146745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4792a096c14ab699%3A0x40a5b82e22c0d50!2s67530%20Klingenthal!5e0!3m2!1sfr!2sfr!4v1700085116773!5m2!1sfr!2sfr2"
+                        width="100%" 
+                        height="450" 
+                        style="border:0; border-radius: 8px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        aria-label="Localisation du Duplex Elysia, Hauts de Klingenthal">
+                    </iframe>
+                </div>
+
+                <h3 style="margin-top: 50px;">Les Avantages de la Résidence</h3>
+                
+                <div class="amenities-grid">
+                    <div class="amenity-card">
+                        <span class="material-icons">pool</span>
+                        <h4>Piscine Chauffée</h4>
+                        <p>Accès à la piscine commune chauffée de la résidence (ouverte selon saison).</p>
+                    </div>
+                    <div class="amenity-card">
+                        <span class="material-icons">sports_tennis</span>
+                        <h4>Deux Terrains de Tennis</h4>
+                        <p>Profitez des installations pour une partie entre amis ou en famille.</p>
+                    </div>
+                    <div class="amenity-card">
+                        <span class="material-icons">local_dining</span>
+                        <h4>Aire de Pique-nique & BBQ</h4>
+                        <p>Espace aménagé avec barbecue pour vos repas en plein air.</p>
+                    </div>
+                    <div class="amenity-card">
+                        <span class="material-icons">sports_soccer</span>
+                        <h4>Terrain de Pétanque</h4>
+                        <p>Idéal pour des moments de détente et de convivialité.</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 50px;">À Proximité</h3>
+
+                <div class="access-grid">
+                    <div class="access-card">
+                        <h4>Obernai</h4>
+                        <p>📍 Seulement <strong>10 minutes</strong> de route.</p>
+                    </div>
+                    <div class="access-card">
+                        <h4>Strasbourg</h4>
+                        <p>📍 À <strong>30 minutes</strong> (capitale européenne).</p>
+                    </div>
+                    <div class="access-card">
+                        <h4>Colmar</h4>
+                        <p>📍 À <strong>30 minutes</strong> (cité de la Petite Venise).</p>
+                    </div>
+                    <div class="access-card">
+                        <h4>Route des Vins</h4>
+                        <p>📍 À <strong>10 minutes</strong> des premiers villages.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="disponibilites" class="calendar-section">
+            <div class="container">
+                <h2>Consultez Nos Disponibilités</h2>
+                <p class="main-location-text">
+                    Le calendrier est mis à jour en temps réel.
+                </p>
+                
+                <div class="calendar-container">
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23FFFFFF&ctz=Europe%2FParis&src=fr.french%23holiday%40group.v.calendar.google.com&color=%231e88e5&showTitle=0&showPrint=0&showTabs=0&showCalendars=0&showDate=1&showNav=1" 
+                        style="border: 0" width="100%" height="600" frameborder="0" scrolling="no">
+                    </iframe>
+                </div>
+
+                <div class="cta-buttons" style="display: flex; justify-content: center; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
+                    <a href="https://www.airbnb.fr" target="_blank" rel="noopener" class="cta-primary large">
+                        <span class="material-icons">house</span>
+                        Réserver via Airbnb
+                    </a>
+                    <a href="https://www.booking.com" target="_blank" rel="noopener" class="cta-primary large" style="background-color: #005A9C;">
+                        <span class="material-icons">hotel</span>
+                        Réserver via Booking
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="reservation" class="cta-section">
+            <div class="container">
+                <h2>Prêt(e) pour l'Expérience Elysia ?</h2>
+                <p class="main-location-text">
+                    Pour votre tranquillité et un paiement 100% sécurisé, veuillez utiliser nos partenaires.
+                </p>
+                <a href="#disponibilites" class="cta-primary large"> 
+                    <span class="material-icons">event_available</span>
+                    Voir les disponibilités
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Elysia Nature & Spa. Tous droits réservés.</p>
+            <div class="footer-nav">
+                <a href="mailto:contact@elysia-spa.fr">Contactez-nous</a>
+                <a href="#mentions-legales">Mentions légales</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="image-modal" class="modal">
+        <span class="close-btn">×</span>
+        <div class="modal-swiper-container swiper-container">
+            <div class="swiper-wrapper" id="modal-gallery-wrapper"></div>
+            <div class="swiper-button-prev modal-nav-prev"></div>
+            <div class="swiper-button-next modal-nav-next"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
