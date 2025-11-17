@@ -1,10 +1,10 @@
 [
     {
-        "filename": "mur-elysia-bg.jpeg",
+        "filename": "mur_elysia_bg.jpeg",
         "caption": "Vue extérieure et nature environnante."
     },
     {
-        "filename": "salon-terrasse.jpeg",
+        "filename": "salon_terrasse.jpeg",
         "caption": "Salon et terrasse avec vue montagne."
     },
     {
@@ -12,15 +12,15 @@
         "caption": "Sauna infrarouge 4 places privatif."
     },
     {
-        "filename": "douche-italienne.jpeg",
+        "filename": "douche_italienne.jpeg",
         "caption": "Luxueuse douche à l'italienne cuivrée."
     },
     {
-        "filename": "chambre-lit.jpeg",
+        "filename": "chambre_lit.jpeg",
         "caption": "Chambre cosy avec lit King Size."
     },
     {
-        "filename": "lit-chambre.jpeg",
+        "filename": "lit_chambre.jpeg",
         "caption": "Détail du lit et de la décoration."
     },
     {
@@ -28,16 +28,12 @@
         "caption": "Kitchenette équipée et fonctionnelle."
     },
     {
-        "filename": "mur-tv-lattes.jpeg",
+        "filename": "mur_tv_lattes.jpeg",
         "caption": "Coin détente et télévision connectée."
     },
     {
-        "filename": "escalier-lumiere.jpeg",
+        "filename": "escalier_lumiere.jpeg",
         "caption": "Escalier menant à l'espace nuit."
-    },
-    {
-        "filename": "lavabo-detail.jpeg",
-        "caption": "Détail de la salle de bain."
     },
     {
         "filename": "vue-montagne.jpeg",
@@ -48,7 +44,7 @@
         "caption": "Le calme de la forêt alsacienne."
     },
     {
-        "filename": "adresse-rbnb.jpeg",
+        "filename": "adresse_rbnb.jpeg",
         "caption": "Façade de l'établissement (pour repérage)."
     },
     {
@@ -68,32 +64,12 @@
         "caption": "Escalier d'accès éclairé."
     },
     {
-        "filename": "facade.jpeg",
-        "caption": "Vue de la façade principale du duplex."
-    },
-    {
         "filename": "logo.jpeg",
         "caption": "Logo Officiel Elysia Nature & Spa."
     },
     {
-        "filename": "piscine.jpeg",
-        "caption": "Accès à la piscine commune de la résidence."
-    },
-    {
-        "filename": "sauna-int.jpeg",
-        "caption": "Vue intérieure du sauna infrarouge."
-    },
-    {
         "filename": "salon.jpeg",
         "caption": "Vue large du salon et de l'espace détente."
-    },
-    {
-        "filename": "terrasse.jpeg",
-        "caption": "Détail de la terrasse privative."
-    },
-    {
-        "filename": "toilettes.jpeg",
-        "caption": "Espace toilettes au rez-de-chaussée."
     },
     {
         "filename": "carrelage-detail.jpeg",
