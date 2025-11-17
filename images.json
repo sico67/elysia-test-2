@@ -1,70 +1,66 @@
-README.md
-Add files via upload
-6 hours ago
-adresse-rbnb.jpeg
-Add files via upload
-6 hours ago
-balneo.jpg
-Add files via upload
-6 hours ago
-carrelage-detail.jpeg
-Add files via upload
-6 hours ago
-chambre-lit.jpeg
-Add files via upload
-6 hours ago
-chambre-velux.jpeg
-Add files via upload
-6 hours ago
-cuisine-microonde.jpeg
-Add files via upload
-6 hours ago
-douche-italienne.jpeg
-Add files via upload
-6 hours ago
-escalier-entrée.jpeg
-Add files via upload
-6 hours ago
-escalier-lumiere.jpeg
-Add files via upload
-6 hours ago
-exterieur-foret.jpeg
-Add files via upload
-6 hours ago
-images.json
-Update images.json
-34 minutes ago
-index.html
-Update index.html
-13 minutes ago
-lit-chambre.jpeg
-Add files via upload
-6 hours ago
-logo.jpeg
-Add files via upload
-6 hours ago
-main.css
-Update main.css
-17 minutes ago
-mur-elysia-bg.jpeg
-Add files via upload
-6 hours ago
-mur-tv-lattes.jpeg
-Add files via upload
-6 hours ago
-salon-terrasse.jpeg
-Add files via upload
-6 hours ago
-salon.jpeg
-Add files via upload
-6 hours ago
-sauna-interieur.jpg
-Add files via upload
-6 hours ago
-script.js
-Update script.js
-19 minutes ago
-style.css
-Add files via upload
-6 hours ago
-vue-montagne.jpeg
+[
+    {
+        "filename": "mur-elysia-bg.jpeg",
+        "caption": "Vue extérieure et nature environnante"
+    },
+    {
+        "filename": "salon-terrasse.jpeg",
+        "caption": "Salon et terrasse avec vue montagne"
+    },
+    {
+        "filename": "sauna-interieur.jpg",
+        "caption": "Sauna infrarouge 4 places privatif"
+    },
+    {
+        "filename": "balneo.jpg",
+        "caption": "Baignoire Balnéo 2 places avec vue"
+    },
+    {
+        "filename": "douche-italienne.jpeg",
+        "caption": "Luxueuse douche à l'italienne cuivrée"
+    },
+    {
+        "filename": "chambre-lit.jpeg",
+        "caption": "Chambre cosy avec lit King Size"
+    },
+    {
+        "filename": "lit-chambre.jpeg",
+        "caption": "Détail du lit et de la décoration"
+    },
+    {
+        "filename": "cuisine-microonde.jpeg",
+        "caption": "Kitchenette équipée et fonctionnelle"
+    },
+    {
+        "filename": "escalier-lumiere.jpeg",
+        "caption": "Escalier menant à l'espace nuit"
+    },
+    {
+        "filename": "vue-montagne.jpeg",
+        "caption": "Vue imprenable depuis la terrasse"
+    },
+    {
+        "filename": "exterieur-foret.jpeg",
+        "caption": "Le calme de la forêt alsacienne"
+    },
+    {
+        "filename": "chambre-velux.jpeg",
+        "caption": "Fenêtre Velux avec vue sur le village"
+    },
+    {
+        "filename": "escalier-entrée.jpeg",
+        "caption": "Escalier d'accès éclairé"
+    },
+    {
+        "filename": "adresse-rbnb.jpeg",
+        "caption": "Façade de l'établissement"
+    },
+    {
+        "filename": "carrelage-detail.jpeg",
+        "caption": "Détail du carrelage et lavabo"
+    },
+    {
+        "filename": "logo.jpeg",
+        "caption": "Logo Officiel Elysia Nature & Spa"
+    }
+]
