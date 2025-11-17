@@ -109,7 +109,7 @@ h1, h2, h3 {
     background-color: #6a3410; /* Un peu plus foncé */
 }
 
-/* Menu Mobile (CORRECTION ICI) */
+/* Menu Mobile (Correction du fonctionnement) */
 .mobile-menu-toggle {
     display: none; /* Caché par défaut sur desktop */
     background: none;
@@ -208,7 +208,8 @@ h2 {
 /* ----------------------------------------------------- */
 
 .hero-section {
-    background-image: url('mur_elysia_bg.jpeg'); 
+    /* CORRECTION ICI : Utilisation du tiret '-' pour correspondre au fichier 'mur-elysia-bg.jpeg' */
+    background-image: url('mur-elysia-bg.jpeg'); 
     background-size: cover;
     background-position: center center;
     height: 90vh;
