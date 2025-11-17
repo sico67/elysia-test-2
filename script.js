@@ -5,8 +5,6 @@
 let modalSwiperInstance = null; 
 
 function init() {
-    // 1. Charger les données de la galerie depuis images.json
-    // Le chemin "images.json" est relatif à index.html et devrait fonctionner sur GitHub Pages
     fetch('images.json')
         .then(response => {
             if (!response.ok) {
@@ -15,13 +13,11 @@ function init() {
             return response.json();
         })
         .then(images => {
-            // 2. Créer la galerie principale et la modale
             createGallery(images);
         })
         .catch(error => {
             console.error('Erreur critique lors du chargement ou de l\'analyse de images.json:', error);
             
-            // Affichage de l'erreur dans la section si elle est trouvée
             const gallerySection = document.getElementById('photos');
             
             if (gallerySection) { 
@@ -31,7 +27,7 @@ function init() {
                             Erreur de chargement des images.
                         </h2>
                         <p style="color:red; font-size: 1.2em; font-weight: bold; margin-top: 15px;">
-                            Veuillez vérifier le fichier images.json (SyntaxError) et le nom des fichiers images (sensible à la casse sur GitHub Pages).
+                            Veuillez vérifier le fichier images.json (SyntaxError) et les chemins d'accès (sensible à la casse sur GitHub Pages).
                         </p>
                         <p style="color: grey; margin-top: 15px; font-size: 0.9em;">
                             Détail de l'erreur technique: ${error.message || 'Erreur inconnue'}
@@ -43,7 +39,6 @@ function init() {
             }
         });
         
-    // 3. Initialisation des autres fonctionnalités
     initMobileNav();
 }
 
@@ -65,8 +60,8 @@ function createGallery(images) {
         slide.classList.add('swiper-slide', 'gallery-item');
         
         const imgElement = document.createElement('img');
-        // CHEMIN D'ACCÈS CLÉ
-        imgElement.src = `fotos/${image.filename}`; 
+        // CHEMIN D'ACCÈS CORRIGÉ : Retire "fotos/" 
+        imgElement.src = `${image.filename}`; 
         imgElement.alt = image.caption;
         imgElement.classList.add('carousel-img');
         imgElement.setAttribute('data-index', index);
@@ -85,8 +80,8 @@ function createGallery(images) {
         modalSlide.classList.add('swiper-slide');
         
         const modalImg = document.createElement('img');
-        // CHEMIN D'ACCÈS CLÉ
-        modalImg.src = `fotos/${image.filename}`;
+        // CHEMIN D'ACCÈS CORRIGÉ : Retire "fotos/"
+        modalImg.src = `${image.filename}`;
         modalImg.alt = image.caption;
         
         modalSlide.appendChild(modalImg);
