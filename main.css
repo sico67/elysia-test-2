@@ -1,44 +1,79 @@
-/* --- Couleurs & Typographie --- */
+/* ========================================================================
+   1. RESET & VARIABLES
+   ======================================================================== */
 :root {
-    /* Couleurs Noires et Bronze (Luxe) */
-    --color-primary: #1a1a1a; /* Noir très foncé pour le fond et le texte principal */
-    --color-secondary: #b8860b; /* Bronze / Or pour les accents (remplace le Teal) */
-    --color-background: #f4f4f4; /* Fond clair pour les sections claires */
-    --color-light: #ffffff; /* Blanc pur pour les cartes et le contenu clair */
-    --color-text-light: #f0f0f0; /* Texte clair sur fond sombre */
-    --color-cta-hover: #9c730a; /* Bronze légèrement plus foncé au survol */
+    --color-black: #1a1a1a;
+    --color-bronze: #b8860b; /* Goldenrod/Bronze pour l'accentuation */
+    --color-light-bronze: #d4af37; /* Plus clair pour les boutons */
+    --color-white: #ffffff;
+    --color-text-dark: #333333;
+    --color-text-light: #f5f5f5;
+
+    --font-primary: 'Inter', sans-serif;
+    --font-secondary: 'Playfair Display', serif;
+
+    --max-width: 1200px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: 'Inter', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-family: var(--font-primary);
     line-height: 1.6;
-    background-color: var(--color-background);
-    color: var(--color-primary);
+    color: var(--color-text-dark);
+    background-color: var(--color-white);
 }
 
-h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    line-height: 1.2;
-    color: var(--color-primary);
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
+
+a {
+    text-decoration: none;
+    color: var(--color-bronze);
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-light-bronze);
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-secondary);
+    color: var(--color-black);
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2em; }
 
 .container {
-    max-width: 1200px;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px;
 }
 
-/* --- Navigation & En-tête --- */
+/* ========================================================================
+   2. HEADER & NAVIGATION
+   ======================================================================== */
 .main-header {
-    background-color: var(--color-light);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.95);
+    border-bottom: 1px solid #eee;
     padding: 15px 0;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
 .main-header .container {
@@ -47,117 +82,159 @@ h1, h2, h3 {
     align-items: center;
 }
 
+/* Logo */
 .logo {
-    font-size: 1.8em;
-    font-weight: 900;
-    color: var(--color-primary);
     display: flex;
     align-items: center;
-    text-decoration: none;
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 1.8em;
+    color: var(--color-black);
+}
+
+.logo-text {
+    margin-left: 5px;
 }
 
 .logo .material-icons {
     font-size: 1.5em;
-    color: var(--color-secondary);
-    margin-right: 5px;
+    color: var(--color-bronze);
 }
 
 .logo-accent {
-    color: var(--color-secondary);
-    font-weight: 700;
+    color: var(--color-bronze);
 }
 
-.main-nav {
-    display: flex;
-    align-items: center;
-}
-
+/* Navigation */
 .nav-list {
     list-style: none;
     display: flex;
-    margin: 0;
-    padding: 0;
+    gap: 30px;
+    align-items: center;
 }
 
 .nav-list a {
-    text-decoration: none;
-    color: var(--color-primary);
-    padding: 10px 15px;
-    transition: color 0.3s;
+    color: var(--color-black);
     font-weight: 500;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
 }
 
-.nav-list a:hover {
-    color: var(--color-secondary);
+.nav-list a:not(.cta-button)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-bronze);
+    transition: width 0.3s ease;
 }
 
+.nav-list a:not(.cta-button):hover::after {
+    width: 100%;
+}
+
+/* CTA Button dans la navigation */
 .cta-button {
-    background-color: var(--color-secondary);
-    color: var(--color-light) !important;
+    background-color: var(--color-bronze);
+    color: var(--color-white) !important;
+    padding: 10px 20px;
     border-radius: 5px;
-    padding: 8px 15px;
-    margin-left: 20px;
-    transition: background-color 0.3s;
     font-weight: 600;
+    transition: background-color 0.3s ease;
 }
 
 .cta-button:hover {
-    background-color: var(--color-cta-hover);
+    background-color: var(--color-light-bronze);
 }
 
 .mobile-menu-toggle {
-    display: none;
+    display: none; /* Caché par défaut sur desktop */
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0;
+    padding: 5px;
 }
+
 .mobile-menu-toggle .material-icons {
-    font-size: 30px;
-    color: var(--color-primary);
+    font-size: 2em;
+    color: var(--color-black);
 }
 
+/* ========================================================================
+   3. SECTIONS COMMUNES
+   ======================================================================== */
+section {
+    padding: 80px 0;
+    text-align: center;
+}
 
-/* --- Styles des Boutons d'Action --- */
+section h2 {
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--color-bronze);
+}
+
 .cta-primary {
     display: inline-flex;
     align-items: center;
-    background-color: var(--color-secondary);
-    color: var(--color-light) !important;
+    justify-content: center;
+    background-color: var(--color-bronze);
+    color: var(--color-white);
     padding: 15px 30px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s, transform 0.2s;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
     margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .cta-primary:hover {
-    background-color: var(--color-cta-hover);
+    background-color: var(--color-light-bronze);
     transform: translateY(-2px);
 }
+
 .cta-primary .material-icons {
-    color: var(--color-light);
     margin-right: 10px;
-    font-size: 1.3em;
 }
 
-.cta-primary.large {
-    font-size: 1.2em;
-    padding: 20px 40px;
+.main-location-text {
+    max-width: 700px;
+    margin: 15px auto 40px;
+    font-size: 1.1em;
+    color: var(--color-text-dark);
 }
 
-/* --- Section Héro (Accueil) --- */
+/* ========================================================================
+   4. SECTION HERO (ACCUEIL)
+   ======================================================================== */
 .hero-section {
-    background: url('mur_elysia_bg.jpeg') center center/cover no-repeat; 
-    min-height: 80vh;
+    /* Exemple de fond inspiré par le thème nature */
+    background-image: url('placeholder_hero.jpeg'); /* Remplacez par le nom de votre image de fond */
+    background-size: cover;
+    background-position: center center;
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    color: var(--color-light);
     position: relative;
-    padding: 100px 20px;
+    color: var(--color-white);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
 }
 
 .hero-section::before {
@@ -167,30 +244,28 @@ h1, h2, h3 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Overlay sombre pour la lisibilité */
+    background-color: rgba(0, 0, 0, 0.4); /* Assombrissement pour lisibilité */
 }
 
 .hero-content {
-    position: relative;
     z-index: 10;
-    max-width: 900px;
+    max-width: 800px;
 }
 
 .hero-content h1 {
-    font-size: 4em;
-    margin-bottom: 0.5em;
-    color: var(--color-light);
-    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    font-size: 3.5em;
+    color: var(--color-white);
+    margin-bottom: 10px;
 }
 
 .hero-content strong {
-    color: var(--color-secondary);
+    color: var(--color-bronze);
 }
 
 .hero-subtitle {
-    font-size: 1.5em;
-    color: var(--color-text-light);
+    font-size: 1.4em;
     font-weight: 300;
+    margin-bottom: 30px;
 }
 
 .scroll-indicator {
@@ -198,46 +273,32 @@ h1, h2, h3 {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    color: var(--color-secondary);
+    opacity: 0.7;
     animation: bounce 2s infinite;
 }
 
+.scroll-indicator .material-icons {
+    font-size: 2.5em;
+    color: var(--color-white);
+}
+
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-    40% {transform: translateX(-50%) translateY(-10px);}
-    60% {transform: translateX(-50%) translateY(-5px);}
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
 }
 
+/* ========================================================================
+   5. DESCRIPTION & SPA (GRILLES)
+   ======================================================================== */
 
-/* --- Sections Générales --- */
-section {
-    padding: 80px 0;
-    text-align: center;
-}
-
-section h2 {
-    font-size: 2.8em;
-    margin-bottom: 1em;
-    position: relative;
-    display: inline-block;
-    color: var(--color-primary);
-}
-
-section h2::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 4px;
-    background-color: var(--color-secondary);
-    margin: 10px auto 0;
-    border-radius: 2px;
-}
-
-/* --- Section Caractéristiques (Le Duplex) --- */
-.description-section {
-    background-color: var(--color-light);
-}
-
+/* Grille de 4 cartes pour la description */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -246,88 +307,87 @@ section h2::after {
 }
 
 .feature-card {
+    background-color: #f9f9f9;
     padding: 30px;
-    background: var(--color-background);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
 }
 
 .feature-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card .material-icons {
+    font-size: 3em;
+    color: var(--color-bronze);
+    margin-bottom: 10px;
 }
 
 .feature-card h3 {
-    color: var(--color-primary);
-    margin-top: 10px;
-    font-size: 1.4em;
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 1.25em;
+    color: var(--color-black);
 }
 
-.material-icons {
-    font-size: 3em;
-    color: var(--color-secondary);
-}
-
-/* --- Section Bien-être & Spa (Thème sombre) --- */
+/* Section Spa (peut être stylisée différemment si besoin) */
 .spa-section {
-    background-color: var(--color-primary); /* Fond Noir pour l'ambiance Spa */
+    background-color: var(--color-black);
     color: var(--color-text-light);
 }
 
 .spa-section h2, .spa-section h3 {
-    color: var(--color-light);
-}
-.spa-section h2::after {
-    background-color: var(--color-secondary);
+    color: var(--color-white);
 }
 
 .spa-features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
     margin-top: 40px;
 }
 
 .spa-feature {
-    padding: 40px 30px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    text-align: left;
-    background-color: #242424;
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
 }
 
 .spa-feature .material-icons {
-    color: var(--color-secondary);
-    margin-right: 10px;
-    font-size: 2em;
+    font-size: 3em;
+    color: var(--color-light-bronze);
+    margin-bottom: 10px;
 }
 
+.spa-feature p {
+    color: #cccccc;
+}
 
-/* --- Section Galerie Photo (Carrousel Swiper) --- */
+/* ========================================================================
+   6. GALERIE (SWIPER)
+   ======================================================================== */
 .gallery-section {
-    background-color: var(--color-background);
-}
-.carousel-container {
-    padding: 40px 0;
-}
-.swiper {
-    width: 100%;
-    height: auto;
-    max-width: 1000px;
-    margin: 0 auto;
+    background-color: #f5f5f5;
 }
 
-.gallery-item {
+.carousel-container {
+    max-width: 900px;
+    margin: 50px auto 0;
     position: relative;
-    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-img {
     width: 100%;
-    height: 500px; /* Hauteur fixe pour une uniformité */
+    height: 500px; /* Hauteur fixe pour l'exemple */
     object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
 }
 
 .carousel-caption {
@@ -335,287 +395,288 @@ section h2::after {
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0, 0, 0, 0.6);
-    color: var(--color-text-light);
-    padding: 10px;
+    background-color: rgba(26, 26, 26, 0.7);
+    color: var(--color-white);
+    padding: 15px;
     font-weight: 500;
-    font-size: 1.1em;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-/* ❌ CORRECTION FLÈCHES DU CARROUSEL PRINCIPAL (VISIBLES EN PERMANENCE) */
-.swiper-button-prev,
-.swiper-button-next {
-    color: var(--color-primary) !important; /* Couleur sombre pour la visibilité sur fond clair */
-    background-color: var(--color-light);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    opacity: 1; /* Rendu visible en permanence */
-    transition: background-color 0.3s;
-}
-
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-    background-color: #e0e0e0;
-}
-
-/* ❌ Forcer la couleur des icônes Swiper à être sombre (noir) */
-.swiper-button-prev::after,
-.swiper-button-next::after {
-    font-size: 20px !important;
-}
-
-
-/* --- Section Localisation --- */
-.localisation-section {
     text-align: left;
-    background-color: var(--color-light);
 }
 
-.main-location-text {
-    font-size: 1.1em;
-    margin-bottom: 30px;
+/* Navigation Swiper (couleur bronze) */
+.swiper-button-next, .swiper-button-prev {
+    color: var(--color-bronze) !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--color-bronze) !important;
+}
+
+/* ========================================================================
+   7. LOCALISATION & AMENITIES
+   ======================================================================== */
+.localisation-section {
+    padding-bottom: 40px;
 }
 
 .map-container {
-    margin-top: 30px;
+    margin: 40px auto;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-.map-container iframe {
-    /* Style déjà défini en ligne, mais bonne pratique de le laisser ici */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
-.amenities-grid, .access-grid {
+/* Grille pour les avantages de la résidence */
+.amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.amenity-card {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 6px;
+}
+
+.amenity-card .material-icons {
+    font-size: 2.5em;
+    color: var(--color-bronze);
+    margin-bottom: 5px;
+}
+
+.amenity-card h4 {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+/* Grille pour l'accès aux villes */
+.access-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     margin-top: 30px;
 }
 
-.amenity-card, .access-card {
-    background-color: var(--color-background);
+.access-card {
+    background-color: var(--color-black);
+    color: var(--color-white);
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    text-align: center;
+    border-radius: 6px;
+    text-align: left;
 }
 
-.amenity-card h4, .access-card h4 {
-    color: var(--color-secondary);
+.access-card h4 {
+    color: var(--color-bronze);
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.access-card p {
+    color: #cccccc;
     margin-top: 5px;
 }
-.amenity-card .material-icons {
-    font-size: 2em;
+
+/* ========================================================================
+   8. DISPONIBILITÉS & CTA
+   ======================================================================== */
+.calendar-section {
+    background-color: #f9f9f9;
 }
 
+.calendar-container {
+    max-width: 900px;
+    margin: 40px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
 
-/* --- Section CTA (Réservation) --- */
 .cta-section {
-    background-color: var(--color-primary); /* Fond Noir */
-    color: var(--color-light);
-    padding: 100px 20px;
+    background-color: var(--color-black);
+    color: var(--color-white);
 }
 
 .cta-section h2 {
-    color: var(--color-light);
+    color: var(--color-white);
 }
 
-.cta-buttons a {
-    text-decoration: none;
-    font-weight: bold;
+.cta-section .main-location-text {
+    color: #cccccc;
 }
 
-/* --- Pied de page --- */
+/* ========================================================================
+   9. FOOTER
+   ======================================================================== */
 footer {
-    background-color: #0d0d0d; /* Noir plus profond */
-    color: #888;
-    padding: 30px 0;
+    background-color: #111;
+    color: #aaa;
+    padding: 20px 0;
     font-size: 0.9em;
 }
-footer a {
-    color: #888;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-footer a:hover {
-    color: var(--color-secondary);
-}
+
 footer .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .footer-nav a {
+    color: #aaa;
     margin-left: 20px;
 }
 
-/* ---------------------------------------------------- */
-/* ❌ LIGHTBOX / MODALE (CORRECTION DU BUG D'AFFICHAGE) */
-/* ---------------------------------------------------- */
+.footer-nav a:hover {
+    color: var(--color-bronze);
+}
 
-/* 1. Assure que la modale est bien en premier plan et a un fond noir */
+/* ========================================================================
+   10. MODAL / LIGHTBOX
+   ======================================================================== */
 .modal {
-    display: none; /* Reste inchangé pour le JS */
+    display: none; /* Caché par défaut */
     position: fixed;
-    z-index: 2000; /* Très haut pour recouvrir tout */
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.95); /* Fond noir très opaque */
-    justify-content: center; /* Centrer le contenu horizontalement */
-    align-items: center; /* Centrer le contenu verticalement */
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
 }
 
-/* 2. Style du conteneur du carrousel dans la modale */
-.modal-swiper-container {
-    position: relative;
-    width: 90%;
-    max-width: 1200px; 
-    height: 90%;
-    max-height: 90vh; 
-    background: #000; /* Fond noir pour l'intérieur du conteneur */
-}
-
-/* 3. Style des images dans la modale */
-.modal-swiper-container img {
-    width: auto; 
-    max-width: 100%;
-    height: 100%;
-    object-fit: contain; /* Assure que l'image tient dans le conteneur sans être coupée */
-    margin: auto; 
-    display: block;
-}
-
-/* 4. Style du bouton de fermeture (en haut à droite) */
 .close-btn {
     position: absolute;
     top: 20px;
     right: 35px;
-    color: var(--color-secondary); /* Bronze */
-    font-size: 45px;
+    color: #f1f1f1;
+    font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
-    z-index: 2001; 
     cursor: pointer;
-    opacity: 1; /* Rendu visible en permanence */
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 2001;
 }
 
-.close-btn:hover,
-.close-btn:focus {
-    color: var(--color-light); /* Blanc/Clair au survol */
+.close-btn:hover, .close-btn:focus {
+    color: var(--color-bronze);
 }
 
-/* 5. Navigation de la modale (Flèches) */
-.modal-nav-prev,
-.modal-nav-next {
-    color: var(--color-secondary) !important; /* Bronze */
-    transition: 0.3s;
-    opacity: 1; /* Rendu visible en permanence */
-    --swiper-navigation-size: 50px; /* Augmenter la taille des flèches */
-}
-.modal-nav-prev:hover,
-.modal-nav-next:hover {
-    color: var(--color-light) !important;
+.modal-swiper-container {
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
 }
 
+.modal-swiper-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 90vh;
+}
 
-/* ---------------------------------------------------- */
-/* --- RESPONSIVE MOBILE --- */
-/* ---------------------------------------------------- */
+.modal-nav-prev, .modal-nav-next {
+    color: var(--color-bronze) !important;
+}
 
+/* ========================================================================
+   11. MEDIA QUERIES (RESPONSIVE)
+   ======================================================================== */
 @media (max-width: 992px) {
-    .main-header .container {
-        flex-direction: row;
-        justify-content: space-between;
+    section {
+        padding: 60px 0;
     }
+
+    h1 {
+        font-size: 2.5em;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    .hero-section {
+        height: 70vh;
+    }
+
+    .nav-list {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Menu mobile */
+    .mobile-menu-toggle {
+        display: block;
+        z-index: 1001;
+    }
+
     .main-nav {
-        flex-grow: 1;
-        justify-content: flex-end;
+        position: relative;
     }
+
     .nav-list {
         display: none;
         flex-direction: column;
         position: absolute;
-        top: 65px;
+        top: 100%;
         left: 0;
         width: 100%;
-        background-color: var(--color-light);
-        box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
-        padding: 10px 0;
-        z-index: 90;
+        background-color: var(--color-black);
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        gap: 0;
+        transform: translateY(-100%);
+        transition: transform 0.3s ease-in-out;
     }
+
     .nav-list.active {
         display: flex;
+        transform: translateY(0);
     }
+
+    .nav-list li {
+        width: 100%;
+    }
+
     .nav-list a {
-        padding: 15px 20px;
-        border-bottom: 1px solid #eee;
-        text-align: left;
-    }
-    .nav-list li:last-child a {
-        border-bottom: none;
-    }
-    .cta-button {
-        margin: 10px 20px;
         display: block;
+        padding: 15px 15px;
+        color: var(--color-white);
         text-align: center;
+        border-bottom: 1px solid #333;
     }
-    .mobile-menu-toggle {
-        display: block;
-        order: 2; /* Pour positionner à droite du logo */
+
+    .nav-list a:not(.cta-button)::after {
+        display: none;
     }
-    
-    /* Héro */
+
+    .cta-button {
+        margin: 15px auto;
+    }
+
+    /* Général */
     .hero-content h1 {
-        font-size: 2.5em;
+        font-size: 2.2em;
     }
+
     .hero-subtitle {
         font-size: 1.2em;
     }
-    
-    /* Général */
-    section {
-        padding: 50px 0;
-    }
-    section h2 {
-        font-size: 2em;
-    }
 
-    /* Spa */
-    .spa-features-grid {
-        grid-template-columns: 1fr;
-    }
-
-    /* Galerie */
     .carousel-img {
-        height: 400px;
+        height: 350px;
     }
-    
-    /* Footer */
+
     footer .container {
         flex-direction: column;
-        text-align: center;
-        gap: 15px;
+        gap: 10px;
     }
+
     .footer-nav a {
         margin: 0 10px;
-    }
-    
-    /* Lightbox */
-    .close-btn {
-        right: 15px;
-        top: 10px;
-        font-size: 30px;
-    }
-    .modal-nav-prev,
-    .modal-nav-next {
-        --swiper-navigation-size: 30px;
     }
 }
