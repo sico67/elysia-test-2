@@ -1,21 +1,70 @@
 [
-    { "filename": "mur_elysia_bg.jpeg", "caption": "Vue extérieure et nature environnante." },
-    { "filename": "salon_terrasse.jpeg", "caption": "Salon et terrasse avec vue montagne." },
-    { "filename": "sauna-interieur.jpg", "caption": "Sauna infrarouge 4 places privatif." },
-    { "filename": "douche_italienne.jpeg", "caption": "Luxueuse douche à l'italienne cuivrée." },
-    { "filename": "chambre_lit.jpeg", "caption": "Chambre cosy avec lit King Size." },
-    { "filename": "lit_chambre.jpeg", "caption": "Détail du lit et de la décoration." },
-    { "filename": "cuisine-microonde.jpeg", "caption": "Kitchenette équipée et fonctionnelle." },
-    { "filename": "mur_tv_lattes.jpeg", "caption": "Coin détente et télévision connectée." },
-    { "filename": "escalier_lumiere.jpeg", "caption": "Escalier menant à l'espace nuit." },
-    { "filename": "vue-montagne.jpeg", "caption": "Vue imprenable depuis la terrasse." },
-    { "filename": "exterieur-foret.jpeg", "caption": "Le calme de la forêt alsacienne." },
-    { "filename": "adresse_rbnb.jpeg", "caption": "Façade de l'établissement (pour repérage)." },
-    { "filename": "balneo.jpg", "caption": "Baignoire Balnéo 2 places avec vue." },
-    { "filename": "chambre-velux.jpeg", "caption": "Fenêtre Velux avec vue sur le village." },
-    { "filename": "douche-italienne.jpeg", "caption": "Autre angle de la douche italienne." },
-    { "filename": "escalier-entrée.jpeg", "caption": "Escalier d'accès éclairé." },
-    { "filename": "logo.jpeg", "caption": "Logo Officiel Elysia Nature & Spa." },
-    { "filename": "salon.jpeg", "caption": "Vue large du salon et de l'espace détente." },
-    { "filename": "carrelage-detail.jpeg", "caption": "Détail du carrelage et lavabo." }
+    {
+        "filename": "mur_elysia_bg.jpeg",
+        "caption": "Vue extérieure et nature environnante"
+    },
+    {
+        "filename": "salon_terrasse.jpeg",
+        "caption": "Salon et terrasse avec vue montagne"
+    },
+    {
+        "filename": "sauna-interieur.jpg",
+        "caption": "Sauna infrarouge 4 places privatif"
+    },
+    {
+        "filename": "balneo.jpg",
+        "caption": "Baignoire Balnéo 2 places avec vue"
+    },
+    {
+        "filename": "douche_italienne.jpeg",
+        "caption": "Luxueuse douche à l'italienne cuivrée"
+    },
+    {
+        "filename": "chambre_lit.jpeg",
+        "caption": "Chambre cosy avec lit King Size"
+    },
+    {
+        "filename": "lit_chambre.jpeg",
+        "caption": "Détail du lit et de la décoration"
+    },
+    {
+        "filename": "cuisine-microonde.jpeg",
+        "caption": "Kitchenette équipée et fonctionnelle"
+    },
+    {
+        "filename": "mur_tv_lattes.jpeg",
+        "caption": "Coin détente et télévision connectée"
+    },
+    {
+        "filename": "escalier_lumiere.jpeg",
+        "caption": "Escalier menant à l'espace nuit"
+    },
+    {
+        "filename": "vue-montagne.jpeg",
+        "caption": "Vue imprenable depuis la terrasse"
+    },
+    {
+        "filename": "exterieur-foret.jpeg",
+        "caption": "Le calme de la forêt alsacienne"
+    },
+    {
+        "filename": "salon.jpeg",
+        "caption": "Vue large du salon et de l'espace détente"
+    },
+    {
+        "filename": "chambre-velux.jpeg",
+        "caption": "Fenêtre Velux avec vue sur le village"
+    },
+    {
+        "filename": "douche-italienne.jpeg",
+        "caption": "Autre angle de la douche italienne"
+    },
+    {
+        "filename": "escalier-entrée.jpeg",
+        "caption": "Escalier d'accès éclairé"
+    },
+    {
+        "filename": "adresse_rbnb.jpeg",
+        "caption": "Façade de l'établissement"
+    }
 ]
