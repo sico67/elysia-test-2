@@ -82,7 +82,7 @@ function createGallerySlide(image, index) {
     slide.classList.add('swiper-slide', 'gallery-item');
     
     const img = document.createElement('img');
-    img.src = `fotos/${image.filename}`;
+    img.src = `${image.filename}`;
     img.alt = image.caption;
     img.classList.add('carousel-img');
     img.setAttribute('data-index', index);
@@ -103,7 +103,7 @@ function createModalSlide(image) {
     slide.classList.add('swiper-slide');
     
     const img = document.createElement('img');
-    img.src = `fotos/${image.filename}`;
+    img.src = `${image.filename}`;
     img.alt = image.caption;
     
     slide.appendChild(img);
