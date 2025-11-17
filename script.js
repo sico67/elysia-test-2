@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- CHARGEMENT ASYNCHRONE DES DONNÉES JSON ---
     async function initializeGallery() {
         let allImagesData = [];
-        // Assurez-vous que le chemin est correct.
         const jsonPath = 'images.json'; 
 
         try {
@@ -111,6 +110,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.style.display = "flex";
                 document.body.style.overflow = "hidden";
                 
+                // AJOUT pour le CSS: marquer le body comme modale ouverte
+                document.body.classList.add('modal-open');
+
                 // 5. CORRECTION CLÉ : Mettre à jour Swiper après que la modale soit visible
                 if (modalSwiperInstance) {
                     setTimeout(() => {
@@ -118,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         modalSwiperInstance.update(); 
                         // S'assurer que nous allons à la bonne slide
                         modalSwiperInstance.slideTo(index, 0);
-                    }, 50); 
+                    }, 50); // Petit délai pour laisser le navigateur rendre l'affichage 'flex'
                 }
             });
         });
@@ -128,6 +130,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function closeModal() {
         modal.style.display = "none";
         document.body.style.overflow = "auto";
+        
+        // CORRECTION: Retirer la classe 'modal-open'
+        document.body.classList.remove('modal-open'); 
+
         if (modalSwiperInstance) {
             // Destruction complète pour libérer la mémoire et éviter les bugs
             modalSwiperInstance.destroy(true, true);
