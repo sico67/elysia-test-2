@@ -102,11 +102,16 @@ function createModalSlide(image) {
     const slide = document.createElement('div');
     slide.classList.add('swiper-slide');
     
+    // Ajouter le conteneur de zoom requis par Swiper
+    const zoomContainer = document.createElement('div');
+    zoomContainer.classList.add('swiper-zoom-container');
+    
     const img = document.createElement('img');
     img.src = `${image.filename}`;
     img.alt = image.caption;
     
-    slide.appendChild(img);
+    zoomContainer.appendChild(img);
+    slide.appendChild(zoomContainer);
     
     return slide;
 }
@@ -156,6 +161,11 @@ function initModalSwiper() {
         },
         mousewheel: {
             forceToAxis: true,
+        },
+        zoom: {
+            maxRatio: 3,
+            minRatio: 1,
+            toggle: true,
         },
         speed: 400,
     });
